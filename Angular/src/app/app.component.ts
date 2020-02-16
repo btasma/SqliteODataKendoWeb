@@ -31,7 +31,7 @@ export class FetchDataComponent {
    public products: GridDataResult;
    public state: DataSourceRequestState = {
        skip: 0,
-       take: 5
+       take: 2
    };
 
    constructor(private dataService: DataService) {

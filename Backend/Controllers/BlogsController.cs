@@ -8,6 +8,8 @@ using Microsoft.AspNet.OData;
 using Microsoft.AspNet.OData.Routing;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using Dapper;
 
 namespace SqliteODataKendoWeb.Controllers
 {
@@ -26,7 +28,7 @@ namespace SqliteODataKendoWeb.Controllers
         // ODATA https://localhost:44393/odata/Blogs?$filter=contains(Url,%20%27msdn%27)&$top=10
         [HttpGet]
         [EnableQuery()]
-        public IQueryable<Blog> Get()
+        public IQueryable<dynamic> Get()
         {
             return _context.Blogs.AsQueryable();
         }
@@ -45,7 +47,9 @@ namespace SqliteODataKendoWeb.Controllers
         [HttpGet("DSR")]
         public JsonResult Get([DataSourceRequest]DataSourceRequest request)
         {
-            var result = Json(_context.Blogs.ToDataSourceResult(request));
+            IQueryable<dynamic> queryable = _context.Blogs.AsQueryable();
+            DataSourceResult dsr = queryable.ToDataSourceResult(request);
+            JsonResult result = Json(dsr);
             return result;
         }
 

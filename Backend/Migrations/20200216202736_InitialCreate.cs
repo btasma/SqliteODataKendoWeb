@@ -26,8 +26,7 @@ namespace SqliteODataKendoWeb.Migrations
                     PostId = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Title = table.Column<string>(nullable: true),
-                    Content = table.Column<string>(nullable: true),
-                    BlogId = table.Column<int>(nullable: false)
+                    BlogId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -37,7 +36,7 @@ namespace SqliteODataKendoWeb.Migrations
                         column: x => x.BlogId,
                         principalTable: "Blogs",
                         principalColumn: "BlogId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
