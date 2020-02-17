@@ -13,7 +13,7 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class DataService {
-    private BASE_URL: string = 'https://localhost:44393/Blogs/DSR';
+    private BASE_URL: string = 'https://localhost:44393/Blogs/EFDSR';
 
     constructor(private http: HttpClient) { }
 
